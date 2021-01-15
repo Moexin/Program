@@ -13,8 +13,8 @@ jobs:
       uses: actions/checkout@v2
     - name: Step 2 - Build
       run: |
-        rm -f ./DDNS/DDNS
-        rm -f ./DDNS/README.md
+        rm -rf ./DDNS
+        mkdir ./DDNS
         while true;do wget -T 15 -c https://github.com/NewFuture/DDNS/releases/latest/download/ddns -O ./DDNS/DDNS && break;done
         while true;do wget -T 15 -c https://raw.githubusercontent.com/NewFuture/DDNS/master/README.md -O ./DDNS/README.md && break;done
     - name: Step 3 - Release
