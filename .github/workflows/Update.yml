@@ -15,8 +15,8 @@ jobs:
       run: |
         rm -rf ./DDNS
         mkdir ./DDNS
-        while true;do wget -T 15 -c https://github.com/NewFuture/DDNS/releases/latest/download/ddns -O ./DDNS/DDNS && break;done
-        while true;do wget -T 15 -c https://raw.githubusercontent.com/NewFuture/DDNS/master/README.md -O ./DDNS/README.md && break;done
+        wget https://github.com/NewFuture/DDNS/releases/latest/download/ddns -O ./DDNS/DDNS
+        wget https://raw.githubusercontent.com/NewFuture/DDNS/master/README.md -O ./DDNS/README.md
     - name: Step 3 - Release
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
