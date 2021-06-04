@@ -13,10 +13,11 @@ jobs:
       uses: actions/checkout@v2
     - name: Step 2 - Build
       run: |
-        rm -rf ./DDNS
-        mkdir ./DDNS
-        wget https://github.com/NewFuture/DDNS/releases/latest/download/ddns -O ./DDNS/DDNS
-        wget https://raw.githubusercontent.com/NewFuture/DDNS/master/README.md -O ./DDNS/README.md
+        rm -rf ./AliDDNS
+        AliDDNS=$(wget -qO- https://api.github.com/repos/OpenIoTHub/aliddns/releases | grep -o '"tag_name": ".*"' | head -n 1 | sed 's/"//g' | sed 's/tag_name: //g' | sed 's/v//g')
+        wget -N -P ./AliDDNS "https://github.com/OpenIoTHub/aliddns/releases/download/v${AliDDNS}/aliddns_${AliDDNS}_Linux_x86_64.tar.gz"
+        tar zxvf ./AliDDNS/aliddns_${AliDDNS}_Linux_x86_64.tar.gz -C ./AliDDNS
+        rm -f ./AliDDNS/aliddns_${AliDDNS}_Linux_x86_64.tar.gz
     - name: Step 3 - Release
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
