@@ -18,6 +18,12 @@ jobs:
         wget -N -P ./AliDDNS "https://github.com/OpenIoTHub/aliddns/releases/download/v${AliDDNS}/aliddns_${AliDDNS}_Linux_x86_64.tar.gz"
         tar zxvf ./AliDDNS/aliddns_${AliDDNS}_Linux_x86_64.tar.gz -C ./AliDDNS
         rm -f ./AliDDNS/aliddns_${AliDDNS}_Linux_x86_64.tar.gz
+        
+        rm -rf ./Lego
+        Lego=$(wget -qO- https://api.github.com/repos/go-acme/lego/releases | grep -o '"tag_name": ".*"' | head -n 1 | sed 's/"//g' | sed 's/tag_name: //g')
+        wget -N -P ./Lego "https://github.com/go-acme/lego/releases/download/${Lego}/lego_${Lego}_linux_amd64.tar.gz"
+        tar zxvf ./Lego/lego_${Lego}_linux_amd64.tar.gz -C ./Lego
+        rm -f ./Lego/lego_${Lego}_linux_amd64.tar.gz
     - name: Step 3 - Release
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
